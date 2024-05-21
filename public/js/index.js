@@ -68,7 +68,6 @@ if (resetPasswordForm) {
         const passwordConfirm =
             document.querySelector('#passwordConfirm').value;
         const token = resetPasswordForm.dataset.token;
-        console.log(token);
 
         resetPassword(password, passwordConfirm, token);
     });

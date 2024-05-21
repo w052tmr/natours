@@ -2206,7 +2206,7 @@
     try {
       const res = await axios_default({
         method: "POST",
-        url: "http://127.0.0.1:8000/api/v1/users/login",
+        url: "/api/v1/users/login",
         data: {
           email,
           password
@@ -2235,7 +2235,7 @@
     try {
       const res = await axios_default({
         method: "POST",
-        url: "http://127.0.0.1:8000/api/v1/users/signup",
+        url: "/api/v1/users/signup",
         data: {
           name,
           email,
@@ -2266,7 +2266,7 @@
     try {
       const res = await axios_default({
         method: "POST",
-        url: "http://127.0.0.1:8000/api/v1/users/forgotPassword",
+        url: "/api/v1/users/forgotPassword",
         data: { email }
       });
       if (res.data.status === "success") {
@@ -2291,7 +2291,7 @@
     try {
       const res = await axios_default({
         method: "POST",
-        url: `http://127.0.0.1:8000/api/v1/users/resetPassword/${token}`,
+        url: `/api/v1/users/resetPassword/${token}`,
         data: {
           password,
           passwordConfirm
@@ -2319,7 +2319,7 @@
     try {
       const res = await axios_default({
         method: "GET",
-        url: "http://127.0.0.1:8000/api/v1/users/logout"
+        url: "/api/v1/users/logout"
       });
       if (res.data.status === "success") {
         showAlert("success", "Logout Successful!");
@@ -2343,7 +2343,7 @@
   // public/js/updateUserSettings.js
   var updateUserSettings = async (data, type) => {
     try {
-      const url = type === "password" ? "http://127.0.0.1:8000/api/v1/users/changePassword" : "http://127.0.0.1:8000/api/v1/users/updateMe";
+      const url = type === "password" ? "/api/v1/users/changePassword" : "/api/v1/users/updateMe";
       const res = await axios_default({
         method: "PATCH",
         url,
@@ -2376,7 +2376,7 @@
     try {
       const res = await axios_default({
         method: "GET",
-        url: `http://127.0.0.1:8000/api/v1/bookings/checkout/${tourId}`
+        url: `/api/v1/bookings/checkout/${tourId}`
       });
       if (res.data.status === "success") {
         showAlert("success", "Checkout Session Loaded Successfully");
@@ -2442,7 +2442,6 @@
       const password = document.querySelector("#password").value;
       const passwordConfirm = document.querySelector("#passwordConfirm").value;
       const token = resetPasswordForm.dataset.token;
-      console.log(token);
       resetPassword(password, passwordConfirm, token);
     });
   }
