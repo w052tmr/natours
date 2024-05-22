@@ -2206,7 +2206,7 @@
     try {
       const res = await axios_default({
         method: "POST",
-        url: "/api/v1/users/login",
+        url: `${window.location.origin}/api/v1/users/login`,
         data: {
           email,
           password
@@ -2235,7 +2235,7 @@
     try {
       const res = await axios_default({
         method: "POST",
-        url: "/api/v1/users/signup",
+        url: `${window.location.origin}/api/v1/users/signup`,
         data: {
           name,
           email,
@@ -2266,7 +2266,7 @@
     try {
       const res = await axios_default({
         method: "POST",
-        url: "/api/v1/users/forgotPassword",
+        url: `${window.location.origin}/api/v1/users/forgotPassword`,
         data: { email }
       });
       if (res.data.status === "success") {
@@ -2291,7 +2291,7 @@
     try {
       const res = await axios_default({
         method: "POST",
-        url: `/api/v1/users/resetPassword/${token}`,
+        url: `${window.location.origin}/api/v1/users/resetPassword/${token}`,
         data: {
           password,
           passwordConfirm
@@ -2319,7 +2319,7 @@
     try {
       const res = await axios_default({
         method: "GET",
-        url: "/api/v1/users/logout"
+        url: `${window.location.origin}/api/v1/users/logout`
       });
       if (res.data.status === "success") {
         showAlert("success", "Logout Successful!");
@@ -2343,17 +2343,14 @@
   // public/js/updateUserSettings.js
   var updateUserSettings = async (data, type) => {
     try {
-      const url = type === "password" ? "/api/v1/users/changePassword" : "/api/v1/users/updateMe";
+      const url = type === "password" ? `${window.location.origin}/api/v1/users/changePassword` : `${window.location.origin}/api/v1/users/updateMe`;
       const res = await axios_default({
         method: "PATCH",
         url,
         data
       });
       if (res.data.status === "success") {
-        showAlert(
-          "success",
-          `User ${type.toUpperCase()} updated successfully.`
-        );
+        showAlert("success", `User ${type} updated successfully.`);
         window.setInterval(() => {
           location = "/accountSettings";
         }, 1e3);

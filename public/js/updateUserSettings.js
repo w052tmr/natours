@@ -5,8 +5,8 @@ export const updateUserSettings = async (data, type) => {
     try {
         const url =
             type === 'password'
-                ? '/api/v1/users/changePassword'
-                : '/api/v1/users/updateMe';
+                ? `${window.location.origin}/api/v1/users/changePassword`
+                : `${window.location.origin}/api/v1/users/updateMe`;
 
         const res = await axios({
             method: 'PATCH',
@@ -15,10 +15,7 @@ export const updateUserSettings = async (data, type) => {
         });
 
         if (res.data.status === 'success') {
-            showAlert(
-                'success',
-                `User ${type.toUpperCase()} updated successfully.`
-            );
+            showAlert('success', `User ${type} updated successfully.`);
             window.setInterval(() => {
                 location = '/accountSettings';
             }, 1000);
