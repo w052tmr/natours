@@ -90,7 +90,7 @@ if (updateUserDataForm) {
         form.append('name', document.getElementById('name').value);
         form.append('photo', document.getElementById('photo').files[0]);
 
-        updateUserSettings(form, 'data');
+        updateUserSettings('data', form);
     });
 }
 

@@ -2341,7 +2341,7 @@
   };
 
   // public/js/updateUserSettings.js
-  var updateUserSettings = async (data, type) => {
+  var updateUserSettings = async (type, data) => {
     try {
       const url = type === "password" ? `${window.location.origin}/api/v1/users/changePassword` : `${window.location.origin}/api/v1/users/updateMe`;
       const res = await axios_default({
@@ -2455,7 +2455,7 @@
       form.append("email", document.getElementById("email").value);
       form.append("name", document.getElementById("name").value);
       form.append("photo", document.getElementById("photo").files[0]);
-      updateUserSettings(form, "data");
+      updateUserSettings("data", form);
     });
   }
   if (updateUserPasswordForm) {
