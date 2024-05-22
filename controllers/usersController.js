@@ -42,7 +42,7 @@ exports.processUserPhoto = catchAsync(async (req, res, next) => {
             .jpeg({ quality: 90 })
             .toFile(`public/img/users/${req.file.filename}`);
 
-        await deleteCurrentUserPhoto(req);
+        // await deleteCurrentUserPhoto(req);
     }
 
     next();
