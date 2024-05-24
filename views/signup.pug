@@ -3,11 +3,12 @@ extends base
 block content 
     main.main
         .login-form
-            h2.heading-secondary.ma-bt-lg Log into your account
+            h2.heading-secondary.ma-bt-lg Create your account
             form.form-signup
-                .form__group
+                .form__group.ma-bt-md
                     label.form__label(for='name') Name
                     input#name.form__input(type='text', placeholder='John Doe', required)
+                .form__group.ma-bt-md
                     label.form__label(for='email') Email address
                     input#email.form__input(type='email', placeholder='you@example.com', required)
                 .form__group.ma-bt-md
