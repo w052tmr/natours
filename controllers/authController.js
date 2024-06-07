@@ -38,9 +38,12 @@ exports.signupUser = catchAsync(async (req, res, next) => {
         passwordConfirm,
     });
 
+    let path = 'login';
+    if (res.cookies.jwt) path = 'accountSettings';
+
     await new sendMail(
         user,
-        `${req.protocol}://${req.get('host')}/accountSettings`
+        `${req.protocol}://${req.get('host')}/${path}`
     ).welcome();
 
     sendTokenResponse(user, 201, res);
