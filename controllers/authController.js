@@ -6,7 +6,7 @@ const { promisify } = require('util');
 const sendMail = require('../utils/sendMail');
 const crypto = require('crypto');
 
-const sendTokenResponse = (user, statusCode, res) => {
+const sendTokenResponse = (user, statusCode, res, email = false) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN,
     });
@@ -18,6 +18,9 @@ const sendTokenResponse = (user, statusCode, res) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
     });
+
+    if (email) {
+    }
 
     user.password = undefined;
 
@@ -38,12 +41,9 @@ exports.signupUser = catchAsync(async (req, res, next) => {
         passwordConfirm,
     });
 
-    let path = 'login';
-    if (res.cookies.jwt) path = 'accountSettings';
-
     await new sendMail(
         user,
-        `${req.protocol}://${req.get('host')}/${path}`
+        `${req.protocol}://${req.get('host')}/login`
     ).welcome();
 
     sendTokenResponse(user, 201, res);
