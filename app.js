@@ -14,6 +14,7 @@ const toursRoutes = require('./routes/toursRoutes');
 const usersRoutes = require('./routes/usersRoutes');
 const reviewsRoutes = require('./routes/reviewsRoutes');
 const bookingsRoutes = require('./routes/bookingsRoutes');
+const bookingsController = require('./controllers/bookingsController');
 const viewsRoutes = require('./routes/viewsRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -70,19 +71,25 @@ app.use(
     })
 );
 
-app.use(express.json({ limit: '10kb' }));
-app.use(cookieParser());
-
-if (process.env.NODE_ENV === 'development') {
-    app.use(morgan('dev'));
-}
-
 const limiter = limit.rateLimit({
     windowMs: 60 * 60 * 1000,
     limit: 100,
     message: 'Too many requests from this IP. Try again in one hour.',
 });
 app.use('/api', limiter);
+
+app.post(
+    '/webhook-checkout',
+    express.raw({ type: 'application/json' }),
+    bookingsController.webhookCheckout
+);
+
+app.use(express.json({ limit: '10kb' }));
+app.use(cookieParser());
+
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
 
 app.use(
     hpp({
