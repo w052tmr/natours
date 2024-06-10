@@ -113,10 +113,14 @@ if (updateUserPasswordForm) {
 
 if (bookingBtn) {
     bookingBtn.addEventListener('click', (e) => {
-        bookingBtn.textContent = 'Processing...';
+        try {
+            bookingBtn.textContent = 'Processing...';
 
-        const { tourid } = e.target.dataset;
+            const { tourid } = e.target.dataset;
 
-        stripeCheckout(tourid);
+            stripeCheckout(tourid);
+        } catch (err) {
+            bookingBtn.textContent = 'Book Tour Now';
+        }
     });
 }
