@@ -31,7 +31,9 @@ exports.getNewCheckoutSession = catchAsync(async (req, res, next) => {
                         name: `${tour.name} Tour`,
                         description: tour.summary,
                         images: [
-                            `https://www.natours.dev/img/tours/${tour.imageCover}`,
+                            `${req.protocol}://${req.get('host')}/img/tours/${
+                                tour.imageCover
+                            }`,
                         ],
                     },
                 },
@@ -66,7 +68,7 @@ const createBookingAfterCheckout = catchAsync(async (req, res, next) => {
 });
 
 exports.webhookCheckout = (req, res, next) => {
-    const signature = req.headers('stripe-sgnature');
+    const signature = req.headers['stripe-signature'];
 
     let event;
     try {
@@ -79,7 +81,7 @@ exports.webhookCheckout = (req, res, next) => {
         return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
-    if (event.type === 'checkout.session.complete')
+    if (event.type === 'checkout.session.completed')
         createBookingAfterCheckout(event.data.object);
 
     res.status(200).json({
