@@ -75,10 +75,10 @@ exports.getMyBookings = catchAsync(async (req, res, next) => {
 exports.alert = (req, res, next) => {
     const { alert } = req.query;
 
+    console.log(alert);
     if (alert === 'booking') {
         res.locals.alert =
             'Your booking was successful! If you do not see it in your bookings, try refreshing the page, or come back later.';
     }
-
     next();
 };
