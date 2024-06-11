@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { showAlert } from './alert';
 
-export const stripeCheckout = async (tourId) => {
+export const stripeCheckout = async (tourId, bookingBtn) => {
     try {
         const res = await axios({
             method: 'GET',
@@ -17,6 +17,7 @@ export const stripeCheckout = async (tourId) => {
         }
     } catch (error) {
         if (error.response) {
+            bookingBtn.textContent = 'Book Tour Now';
             showAlert('error', error.response.data.message);
         } else if (error.request) {
             showAlert('error', error.message);

@@ -12,6 +12,8 @@ router.get('/signup', viewsController.getSignup);
 router.get('/forgotPassword', viewsController.getForgotPassword);
 router.get('/passwordReset/:token', viewsController.getPasswordReset);
 
+router.use(viewsController.alert);
+
 router.get('/', viewsController.getOverview);
 
 router.get('/tour/:slug', viewsController.getTour);

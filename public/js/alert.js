@@ -4,7 +4,7 @@ const removeAlert = () => {
     if (alert) alert.remove();
 };
 
-export const showAlert = (type, message) => {
+export const showAlert = (type, message, time = 5) => {
     removeAlert();
 
     document
@@ -16,5 +16,5 @@ export const showAlert = (type, message) => {
 
     window.setTimeout(() => {
         removeAlert();
-    }, 5000);
+    }, time * 1000);
 };

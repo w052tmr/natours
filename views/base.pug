@@ -10,7 +10,7 @@ html
         //- link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Lato:300,300i,700')
         script(src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="")
 
-    body 
+    body(data-alert=`${alert ? alert : ''}`) 
         // HEADER
         include _header
 

@@ -8,6 +8,7 @@ import {
 } from './authentication';
 import { updateUserSettings } from './updateUserSettings';
 import { stripeCheckout } from './stripe';
+import { showAlert } from './alert';
 
 //DOM ELEMENTS
 const map = document.querySelector('#map');
@@ -113,14 +114,13 @@ if (updateUserPasswordForm) {
 
 if (bookingBtn) {
     bookingBtn.addEventListener('click', (e) => {
-        try {
-            bookingBtn.textContent = 'Processing...';
+        bookingBtn.textContent = 'Processing...';
 
-            const { tourid } = e.target.dataset;
+        const { tourid } = e.target.dataset;
 
-            stripeCheckout(tourid);
-        } catch (err) {
-            bookingBtn.textContent = 'Book Tour Now';
-        }
+        stripeCheckout(tourid, bookingBtn);
     });
 }
+
+const alert = document.body.dataset.alert;
+if (alert !== '') showAlert('success', alert, 20);
