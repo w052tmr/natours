@@ -77,7 +77,7 @@ exports.alert = (req, res, next) => {
 
     if (alert === 'booking') {
         res.locals.alert =
-            'Your tour was booked successfully! If you do not see it in your bookings, try refreshing the page, or come back later.';
+            'Your booking was successful! If you do not see it in your bookings, try refreshing the page, or come back later.';
     }
 
     next();

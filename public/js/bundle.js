@@ -2186,9 +2186,9 @@
 
   // public/js/alert.js
   var removeAlert = () => {
-    const alert2 = document.getElementById("alert");
-    if (alert2)
-      alert2.remove();
+    const alert = document.getElementById("alert");
+    if (alert)
+      alert.remove();
   };
   var showAlert = (type, message, time = 5) => {
     removeAlert();
@@ -2479,7 +2479,7 @@
       stripeCheckout(tourid, bookingBtn);
     });
   }
-  var alert = document.body.dataset.alert;
-  if (alert !== "")
-    showAlert("success", alert, 20);
+  var alertMessage = document.querySelector("body").dataset.alert;
+  if (alertMessage !== "")
+    showAlert("success", alertMessage, 20);
 })();
