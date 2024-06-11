@@ -2186,11 +2186,11 @@
 
   // public/js/alert.js
   var removeAlert = () => {
-    const alert = document.getElementById("alert");
-    if (alert)
-      alert.remove();
+    const alert2 = document.getElementById("alert");
+    if (alert2)
+      alert2.remove();
   };
-  var showAlert = (type, message) => {
+  var showAlert = (type, message, time = 5) => {
     removeAlert();
     document.querySelector("body").insertAdjacentHTML(
       "afterbegin",
@@ -2198,7 +2198,7 @@
     );
     window.setTimeout(() => {
       removeAlert();
-    }, 5e3);
+    }, time * 1e3);
   };
 
   // public/js/authentication.js
@@ -2369,7 +2369,7 @@
   };
 
   // public/js/stripe.js
-  var stripeCheckout = async (tourId) => {
+  var stripeCheckout = async (tourId, bookingBtn2) => {
     try {
       const res = await axios_default({
         method: "GET",
@@ -2383,6 +2383,7 @@
       }
     } catch (error) {
       if (error.response) {
+        bookingBtn2.textContent = "Book Tour Now";
         showAlert("error", error.response.data.message);
       } else if (error.request) {
         showAlert("error", error.message);
@@ -2475,7 +2476,10 @@
     bookingBtn.addEventListener("click", (e) => {
       bookingBtn.textContent = "Processing...";
       const { tourid } = e.target.dataset;
-      stripeCheckout(tourid);
+      stripeCheckout(tourid, bookingBtn);
     });
   }
+  var alert = document.body.dataset.alert;
+  if (alert !== "")
+    showAlert("success", alert, 20);
 })();
