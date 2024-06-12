@@ -21,7 +21,7 @@ export const updateUserSettings = async (type, data) => {
             }, 1000);
         }
     } catch (error) {
-        if (error.response && type === 'data') {
+        if (error.response && type !== 'data') {
             showAlert(
                 'error',
                 'Sorry, but file uploads are only supported when the application is run locally.',
