@@ -21,7 +21,13 @@ export const updateUserSettings = async (type, data) => {
             }, 1000);
         }
     } catch (error) {
-        if (error.response) {
+        if (error.response && type === 'data') {
+            showAlert(
+                'error',
+                'Sorry, but file uploads are only supported when the application is run locally.',
+                15
+            );
+        } else if (error.response) {
             showAlert('error', error.response.data.message);
         } else if (error.request) {
             showAlert('error', error.message);
