@@ -10,4 +10,6 @@ After completing the course, I recoded the entire project from scratch to ensure
 
 ** Default course files included all the Pug files as well as the CSS file. However, the CSS file was missing media queries, so I added media queries to ensure the website would be responsive on different devices.
 
-** The project was deployed using Vercel. Everything seems to work fine on larger devices, but I noticed some issues when using it on my iOS mobile device. I do not believe these issues have anything to do with my code, considering the application is only buggy on my iOS device and not on any of my other devices.
+** The project was deployed using Vercel. Everything seems to work fine on larger devices, but I noticed some issues when using it on my iOS mobile device. I do not believe these issues have anything to do with my code, considering the application is only buggy on my iOS device and not on any of my other devices. 
+
+** Lastly, it should be noted that user image uploads will NOT work when using the vercel hosted version of the application, as implementing file storage in vercel does not appear to be a viable option due to some incomptability issues with the libraries and frameworks I used in the project. I can, however, confirm that the image upload functionality does in fact work when when hosted locally.
