@@ -21,6 +21,7 @@ export const updateUserSettings = async (type, data) => {
             }, 1000);
         }
     } catch (error) {
+        console.log(error);
         if (type !== 'password') {
             showAlert(
                 'error',
