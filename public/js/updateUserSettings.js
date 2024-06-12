@@ -22,21 +22,21 @@ export const updateUserSettings = async (type, data) => {
         }
     } catch (error) {
         console.log(error);
-        if (type !== 'password') {
-            showAlert(
-                'error',
-                'Sorry, but file uploads are only supported when the application is run locally.',
-                15
-            );
-            console.log('Error: ', error);
-        } else if (error.response) {
-            showAlert('error', error.response.data.message);
-        } else if (error.request) {
-            showAlert('error', error.message);
-            console.log('Error: ', error.request);
-        } else {
-            showAlert('error', error.message);
-            console.log('Error:', error.message);
-        }
+        // if (type !== 'password') {
+        showAlert(
+            'error',
+            'Sorry, but file uploads are only supported when the application is run locally.',
+            15
+        );
+        //     console.log('Error: ', error);
+        // } else if (error.response) {
+        //     showAlert('error', error.response.data.message);
+        // } else if (error.request) {
+        //     showAlert('error', error.message);
+        //     console.log('Error: ', error.request);
+        // } else {
+        //     showAlert('error', error.message);
+        //     console.log('Error:', error.message);
+        // }
     }
 };
