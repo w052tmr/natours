@@ -41,10 +41,20 @@ exports.signupUser = catchAsync(async (req, res, next) => {
         passwordConfirm,
     });
 
-    await new sendMail(
-        user,
-        `${req.protocol}://${req.get('host')}/login`
-    ).welcome();
+    try {
+        await new sendMail(
+            user,
+            `${req.protocol}://${req.get('host')}/login`
+        ).welcome();
+    } catch (err) {
+        console.log(err);
+        return next(
+            new AppError(
+                'Account creation successful! But there was an error logging you in and sending your welcome email',
+                err.statusCode
+            )
+        );
+    }
 
     sendTokenResponse(user, 201, res);
 });
@@ -201,14 +211,15 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
             user,
             `${req.protocol}://${req.get('host')}/passwordReset/${resetToken}`
         ).passwordReset();
-
-        res.status(200).json({
-            status: 'success',
-            message: 'Password reset sent successfully.',
-        });
     } catch (err) {
+        console.log(err);
         return next(new AppError('Error Sending Email', err.statusCode));
     }
+
+    res.status(200).json({
+        status: 'success',
+        message: 'Password reset sent successfully.',
+    });
 });
 
 exports.resetPassword = catchAsync(async (req, res, next) => {
