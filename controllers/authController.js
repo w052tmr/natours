@@ -202,6 +202,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     const { email } = req.body;
 
     const user = await User.findOne({ email });
+    if (!user) return next(new AppError(`${email} could not be found`, 404));
 
     const resetToken = user.generateResetToken();
     await user.save({ validateModifiedOnly: true });
