@@ -109,7 +109,7 @@ module.exports = (err, req, res, next) => {
             error = handleJWTError(error, res);
         }
 
-        if (error.name === 'TokenExpiredError, res') {
+        if (error.name === 'TokenExpiredError') {
             error = handleTokenExpiredError(error);
         }
 

@@ -115,7 +115,9 @@ app.use('/api/v1/reviews', reviewsRoutes);
 app.use('/api/v1/bookings', bookingsRoutes);
 
 app.all('*', (req, res, next) => {
-    const message = `Invalid Route: ${req.protocol}://${req.hostname}:${process.env.PORT}${req.originalUrl} does not exist on this server.`;
+    const message = `Invalid Route: ${req.protocol}://${req.get('host')}${
+        req.originalUrl
+    } does not exist on this server.`;
 
     return next(new AppError(message, 404));
 });
